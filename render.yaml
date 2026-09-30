@@ -1,0 +1,24 @@
+databases:
+  - name: letter-to-bapa-db
+    plan: basic-256mb
+    postgresMajorVersion: 16
+    region: frankfurt
+
+services:
+  - type: web
+    name: letter-to-bapa
+    runtime: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: letter-to-bapa-db
+          property: connectionString
+      - key: ADMIN_KEY
+        generateValue: true
