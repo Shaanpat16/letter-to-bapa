@@ -1,15 +1,15 @@
 databases:
   - name: letter-to-bapa-db
-    plan: basic-256mb
+    plan: free
     postgresMajorVersion: 16
-    region: frankfurt
+    region: virginia
 
 services:
   - type: web
     name: letter-to-bapa
     runtime: node
-    plan: starter
-    region: frankfurt
+    plan: free
+    region: virginia
     buildCommand: npm ci && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
